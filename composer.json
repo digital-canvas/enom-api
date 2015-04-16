@@ -1,5 +1,5 @@
 {
-    "name": "digitalcanvas/enom-api",
+    "name": "digital-canvas/enom-api",
     "description": "Enom API",
     "require": {
         "guzzlehttp/guzzle": "~4.0"
