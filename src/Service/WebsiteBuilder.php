@@ -35,7 +35,7 @@ class WebsiteBuilder extends Enom
      *
      * @param string $language
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function createAccount($language = 'en_us')
     {
@@ -57,7 +57,7 @@ class WebsiteBuilder extends Enom
      * @param int $reason The reason for cancelling
      * @param string $comments Comment on why the account is being cancelled
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function cancelAccount($account_id, $reason = 1, $comments = null)
     {
@@ -86,7 +86,7 @@ class WebsiteBuilder extends Enom
      *
      * @param int $brand
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function getCurrencies($brand)
     {
@@ -105,7 +105,7 @@ class WebsiteBuilder extends Enom
      *
      * @param string $account_id
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function getDetails($account_id)
     {
@@ -122,7 +122,7 @@ class WebsiteBuilder extends Enom
     /**
      * Returns languages
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function getLanguages()
     {
@@ -142,7 +142,7 @@ class WebsiteBuilder extends Enom
      * @param string $site
      * @param int $brand
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function getLoginToken($user, $site, $brand)
     {
@@ -165,7 +165,7 @@ class WebsiteBuilder extends Enom
      * @param string $sort
      * @param int $filter
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function getOverview($start = 0, $sort = 'ASC', $filter = null)
     {
@@ -193,7 +193,7 @@ class WebsiteBuilder extends Enom
      * @param string $account_id
      * @param string $comments
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function reactivateAccount($account_id, $comments = null)
     {
@@ -222,7 +222,7 @@ class WebsiteBuilder extends Enom
      * @param bool $dns
      * @param string $language
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function updateAccount(
       $account_id,
@@ -262,7 +262,7 @@ class WebsiteBuilder extends Enom
      * @param string $plan
      * @param string $billing_cycle
      *
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \SimpleXMLElement
      */
     public function upgradeAccount($account_id, $plan, $billing_cycle = 'Monthly')
     {

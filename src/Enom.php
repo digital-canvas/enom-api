@@ -1,6 +1,7 @@
 <?php
 namespace DigitalCanvas\Enom;
 
+use DigitalCanvas\Enom\Exception\ErrorResponseException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\ResponseInterface as Response;
 
@@ -109,9 +110,9 @@ abstract class Enom
 
     /**
      * @param array $params
-     * @return Response
+     * @return \SimpleXMLElement
      */
-    protected function sendRequest(array $params = array())
+    protected function sendRequest(array $params = [])
     {
         $url = ($this->mode) ? static::URL : static::URL_TEST;
         // Add Credentials to Params
@@ -121,9 +122,52 @@ abstract class Enom
           'ResponseType' => 'XML'
         ]);
 
-        return $this->client->post($url, [
+        $response = $this->client->post($url, [
           'query' => $params
         ]);
 
+        if ($this->isErrorResponse($response)) {
+            throw $this->createErrorResponseException($response);
+        }
+
+        return $response->xml();
+
+    }
+
+    /**
+     * @param Response $response
+     * @return bool
+     */
+    protected function isErrorResponse(Response $response)
+    {
+        $xml = $response->xml();
+        if ($xml->ErrCount && $xml->ErrCount > 0) {
+            return true;
+        }
+        if ($xml->Success == false) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Response $response
+     * @return ErrorResponseException
+     */
+    protected function createErrorResponseException(Response $response)
+    {
+
+        $xml = $response->xml();
+        if ($xml->errors->Err1) {
+            $message = (string)$xml->errors->Err1;
+        } else {
+            $message = 'Failed to execute ' . $xml->Command;
+        }
+
+        $exception = new ErrorResponseException($message);
+        $exception->setResponse($response);
+
+        return $exception;
     }
 }
