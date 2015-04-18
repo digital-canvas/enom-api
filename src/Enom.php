@@ -144,7 +144,7 @@ abstract class Enom
         if ($xml->ErrCount && $xml->ErrCount > 0) {
             return true;
         }
-        if ($xml->Success == false) {
+        if ($xml->Success == 'false') {
             return true;
         }
 
