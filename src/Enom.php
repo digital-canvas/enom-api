@@ -8,7 +8,7 @@ use GuzzleHttp\Message\ResponseInterface as Response;
 abstract class Enom
 {
 
-    const URL = 'http://reseller.enom.com/interface.asp';
+    const URL = 'https://reseller.enom.com/interface.asp';
 
     const URL_TEST = 'https://resellertest.enom.com/interface.asp';
 
@@ -147,6 +147,9 @@ abstract class Enom
         if ($xml->Success == 'false') {
             return true;
         }
+        if ($xml->ErrString) {
+            return true;
+        }
 
         return false;
     }
@@ -161,6 +164,8 @@ abstract class Enom
         $xml = $response->xml();
         if ($xml->errors->Err1) {
             $message = (string)$xml->errors->Err1;
+        } elseif ($xml->ErrString) {
+            $message = (string)$xml->ErrString;
         } else {
             $message = 'Failed to execute ' . $xml->Command;
         }
