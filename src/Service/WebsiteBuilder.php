@@ -36,8 +36,12 @@ class WebsiteBuilder extends Enom
      * @param string $language
      *
      * @return \SimpleXMLElement
+     * 
+     * @internal The language tag is not fully implemented in this method. Enom api documentation states the default language parameter is 'en_us'. The 'en_us' language paramter actually causes the upgrade and theme links in the editor to break. The actual correct enom value for en_us is 'en_US', case senstive. But the 'en_US' value for the language parameter is not fully implemented and alhtough it works results in incomplete description of the plans in the editor UI. Use 'en' until Enom fixes this API method.  
+     * 
+     * @todo Get Enom to fully implement the language parameter. 'en_US' isn't fully implemented and if no language parameter is this breaks the Editor UI for upgrade and theme links.
      */
-    public function createAccount($language = 'en_us')
+    public function createAccount($language = 'en')
     {
         $params = [
           'Command' => 'WSB_CreateAccount',
