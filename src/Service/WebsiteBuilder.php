@@ -153,8 +153,7 @@ class WebsiteBuilder extends Enom
         $params = [
           'command' => 'WSB_GetLoginToken',
           'userref' => $user,
-          'siteref' => $site,
-          'brand' => $brand,
+          'siteref' => $site
         ];
 
         $response = $this->sendRequest($params);
@@ -233,7 +232,7 @@ class WebsiteBuilder extends Enom
       $domain,
       $username,
       $email,
-      $billing_cycle = 'monthly',
+      $billing_cycle = 'Monthly',
       $dns = false,
       $language = 'en'
     ) {
@@ -250,7 +249,6 @@ class WebsiteBuilder extends Enom
           'domainname' => $domain,
           'username' => $username,
           'emailaddress' => $email,
-          'languagecode' => $language,
           'setdns' => ($dns) ? 1 : 0,
         ];
 
