@@ -44,9 +44,9 @@ class WebsiteBuilder extends Enom
     public function createAccount($language = 'en')
     {
         $params = [
-          'Command' => 'WSB_CreateAccount',
-          'Service' => 'websitebuilderfree',
-          'LanguageCode' => $language
+          'command' => 'WSB_CreateAccount',
+          'service' => 'websitebuilderfree',
+          'languagecode' => $language
         ];
 
         $response = $this->sendRequest($params);
@@ -71,9 +71,9 @@ class WebsiteBuilder extends Enom
         }
 
         $params = [
-          'Command' => 'WSB_CancelAccount',
-          'VasItemID' => $account_id,
-          'ReasonID' => (int)$reason
+          'command' => 'WSB_CancelAccount',
+          'vasitemid' => $account_id,
+          'reasonid' => (int)$reason
         ];
 
         if (!is_null($comments)) {
@@ -95,8 +95,8 @@ class WebsiteBuilder extends Enom
     public function getCurrencies($brand)
     {
         $params = [
-          'Command' => 'WSB_GetCurrencies',
-          'Brand' => $brand
+          'command' => 'WSB_GetCurrencies',
+          'brand' => $brand
         ];
 
         $response = $this->sendRequest($params);
@@ -114,8 +114,8 @@ class WebsiteBuilder extends Enom
     public function getDetails($account_id)
     {
         $params = [
-          'Command' => 'WSB_GetDetails',
-          'VasItemID' => $account_id
+          'command' => 'WSB_GetDetails',
+          'vasitemid' => $account_id
         ];
 
         $response = $this->sendRequest($params);
@@ -131,7 +131,7 @@ class WebsiteBuilder extends Enom
     public function getLanguages()
     {
         $params = [
-          'Command' => 'WSB_GetLanguages'
+          'command' => 'WSB_GetLanguages'
         ];
 
         $response = $this->sendRequest($params);
@@ -151,10 +151,10 @@ class WebsiteBuilder extends Enom
     public function getLoginToken($user, $site, $brand)
     {
         $params = [
-          'Command' => 'WSB_GetLoginToken',
-          'UserRef' => $user,
-          'SiteRef' => $site,
-          'Brand' => $brand,
+          'command' => 'WSB_GetLoginToken',
+          'userref' => $user,
+          'siteref' => $site,
+          'brand' => $brand,
         ];
 
         $response = $this->sendRequest($params);
@@ -175,16 +175,16 @@ class WebsiteBuilder extends Enom
     {
 
         $params = [
-          'Command' => 'WSB_GetOverview'
+          'command' => 'WSB_GetOverview'
         ];
         if ($start > 0) {
-            $params['StartRecordNum'] = (int)$start;
+            $params['startrecordnum'] = (int)$start;
         }
         if (in_array($sort, ['ASC', 'DESC'])) {
-            $params['SortOrder'] = $sort;
+            $params['sortorder'] = $sort;
         }
         if (in_array($filter, range(1, 9))) {
-            $params['StatusFilter'] = $filter;
+            $params['statusfilter'] = $filter;
         }
         $response = $this->sendRequest($params);
 
@@ -202,12 +202,12 @@ class WebsiteBuilder extends Enom
     public function reactivateAccount($account_id, $comments = null)
     {
         $params = [
-          'Command' => 'WSB_ReactivateAccount',
-          'VasItemID' => $account_id
+          'command' => 'WSB_ReactivateAccount',
+          'vasitemid' => $account_id
         ];
 
         if (!is_null($comments)) {
-            $params['Comment'] = $comments;
+            $params['comment'] = $comments;
         }
 
         $response = $this->sendRequest($params);
@@ -233,9 +233,9 @@ class WebsiteBuilder extends Enom
       $domain,
       $username,
       $email,
-      $billing_cycle = 'Monthly',
+      $billing_cycle = 'monthly',
       $dns = false,
-      $language = 'en_us'
+      $language = 'en'
     ) {
         if (!in_array($billing_cycle, ['Monthly', 'Yearly'])) {
             throw new \InvalidArgumentException("Invalid billing cycle");
@@ -244,14 +244,14 @@ class WebsiteBuilder extends Enom
         }
 
         $params = [
-          'Command' => 'WSB_UpdateAccount',
-          'VasItemID' => $account_id,
-          'BillingCycle' => $billing_cycle,
-          'DomainName' => $domain,
-          'UserName' => $username,
-          'EmailAddress' => $email,
-          'LanguageCode' => $language,
-          'SetDNS' => ($dns) ? 1 : 0,
+          'command' => 'WSB_UpdateAccount',
+          'vasitemid' => $account_id,
+          'billingcycle' => $billing_cycle,
+          'domainname' => $domain,
+          'username' => $username,
+          'emailaddress' => $email,
+          'languagecode' => $language,
+          'setdns' => ($dns) ? 1 : 0,
         ];
 
         $response = $this->sendRequest($params);
@@ -279,11 +279,11 @@ class WebsiteBuilder extends Enom
         }
 
         $params = [
-          'Command' => 'PurchaseServices',
-          'VasItemID' => $account_id,
-          'Service' => $plan,
-          'ActionType' => 'upgrade',
-          'BillingPeriod' => $billing_cycle
+          'command' => 'PurchaseServices',
+          'vasitemiD' => $account_id,
+          'service' => $plan,
+          'actionyype' => 'upgrade',
+          'billingperiod' => $billing_cycle
         ];
 
         $response = $this->sendRequest($params);
