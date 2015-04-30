@@ -278,9 +278,9 @@ class WebsiteBuilder extends Enom
 
         $params = [
           'command' => 'PurchaseServices',
-          'vasitemiD' => $account_id,
+          'vasitemid' => $account_id,
           'service' => $plan,
-          'actionyype' => 'upgrade',
+          'actiontype' => 'create',
           'billingperiod' => $billing_cycle
         ];
 
